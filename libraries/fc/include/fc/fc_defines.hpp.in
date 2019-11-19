@@ -1,0 +1,23 @@
+#ifndef EOSIO_FC_DEFINES_HPP_IN_H
+#define EOSIO_FC_DEFINES_HPP_IN_H
+
+#pragma once
+
+#if ${USE_PUB_KEY_LEGACY_PREFIX}
+#define USE_LEGACY_KEY_STR
+#endif
+
+namespace fc {
+   namespace crypto {
+      namespace config {
+         constexpr const char* public_key_legacy_prefix = "${PUB_KEY_LEGACY_PREFIX}";
+         constexpr const char* public_key_base_prefix = "${PUB_KEY_BASE_PREFIX}";
+         constexpr const char* public_key_prefix[] = {
+               "K1",
+               "R1"
+         };
+      };
+   };
+}
+
+#endif //EOSIO_FC_DEFINES_HPP_IN_H
