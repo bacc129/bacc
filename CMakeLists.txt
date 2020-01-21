@@ -305,6 +305,7 @@ endif(USE_BONUS_TO_VOTE)
 
 include(wasm)
 add_subdirectory( libraries )
+add_subdirectory( contracts )
 add_subdirectory( plugins )
 add_subdirectory( programs )
 
