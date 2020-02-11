@@ -247,7 +247,7 @@ void system_contract::votebyreward( const account_name voter, const account_name
     const auto& vts = votes_tbl.get( bpname, "voter have not add votes to the the producer yet" );
 
     const auto curr_block_num    = current_block_num();
-    const auto mini_reward_chaim = asset{ 50 * 10000 };
+    //const auto mini_reward_chaim = asset{ 50 * 10000 };
 
     const auto newest_total_voteage =
       static_cast<int128_t>( bp.total_voteage + bp.total_staked * ( curr_block_num - bp.voteage_update_height ) );
@@ -278,7 +278,7 @@ void system_contract::votebyreward( const account_name voter, const account_name
 
     //print("chaim ", reward_all.amount, " ", bp.rewards_pool.amount, "\n");
 
-    eosio_assert( reward_all >= mini_reward_chaim, "reward should more then 100.0000 BACC!" );
+    //eosio_assert( reward_all >= mini_reward_chaim, "reward should more then 100.0000 BACC!" );
 
     votes_tbl.modify( vts, 0, [&]( vote_info& v ) {
         v.voteage               = 0;
@@ -343,8 +343,7 @@ void system_contract::claim( const account_name voter, const account_name bpname
     const auto& vts = votes_tbl.get( bpname, "voter have not add votes to the the producer yet" );
 
     const auto curr_block_num    = current_block_num();
-    const auto fee_per_chaim     = asset{ 10 * 10000 };
-    const auto mini_reward_chaim = asset{ 50 * 10000 };
+    //const auto mini_reward_chaim = asset{ 50 * 10000 };
 
     const auto newest_total_voteage =
       static_cast<int128_t>( bp.total_voteage + bp.total_staked * ( curr_block_num - bp.voteage_update_height ) );
@@ -374,18 +373,12 @@ void system_contract::claim( const account_name voter, const account_name bpname
 
     print("chaim ", reward_all.amount, " ", bp.rewards_pool.amount, "\n");
 
-    eosio_assert( reward_all > mini_reward_chaim, "reward should more then 50.0000 BACC!" );
-    reward_all -= fee_per_chaim;
+    //eosio_assert( reward_all > mini_reward_chaim, "reward should more then 50.0000 BACC!" );
 
     INLINE_ACTION_SENDER( eosio::token, transfer )
         ( config::token_account_name,
         { config::system_account_name, N( active ) },
         { config::system_account_name, voter, reward_all, "claim" } );
-
-    INLINE_ACTION_SENDER( eosio::token, transfer )
-        ( config::token_account_name,
-        { config::system_account_name, N( active ) },
-        { config::system_account_name, config::develop_account_name, fee_per_chaim, "claim fee" } );
 
     votes_tbl.modify( vts, 0, [&]( vote_info& v ) {
         v.voteage               = 0;
