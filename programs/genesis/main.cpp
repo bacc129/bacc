@@ -77,6 +77,7 @@ int main( int argc, const char **argv ) {
    my_keymap.add_init_acc(gs, N(bacc.better),   0*10000,     private_key);
    my_keymap.add_init_acc(gs, N(bacc.vpool),    0*10000,     private_key);
    my_keymap.add_init_acc(gs, N(bacc.pawn),     0*10000,     private_key);
+   my_keymap.add_init_acc(gs, N(bacc.pow),      0*10000,     private_key);
 
    // for test
    my_keymap.add_init_acc(gs, N(bacc.test), 1000*10000,  private_key);

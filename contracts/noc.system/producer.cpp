@@ -87,8 +87,18 @@ void system_contract::onblock( const block_timestamp,
             "issue tokens for block reward" );
     }
 
-    const auto reward_tobe_send = asset{ 1, CORE_SYMBOL };
-    reward_current_block -= reward_tobe_send;
+    auto reward_for_pow = asset{ 0, CORE_SYMBOL };
+    if( reward_for_pow > reward_current_block ){
+        reward_for_pow = reward_current_block;
+    }
+    if( reward_for_pow > asset{} ){
+        eosio::token::issue_token_inline(
+            ::config::pow_pool_account_name,
+            reward_for_pow,
+            "issue tokens for pow pool" );
+    }
+
+    reward_current_block -= reward_for_pow;
     const auto reward_for_produce = (reward_current_block * reward_for_produce_p) / 100;
     const auto reward_for_bps = (reward_current_block * reward_for_bps_p) / 100;
     const auto reward_for_user = reward_current_block - (reward_for_bps + reward_for_produce);

@@ -27,6 +27,7 @@ namespace config {
    const static uint64_t bp_pawn_account_name   = N(${ROOT_ACCOUNT}.pawn);
    const static uint64_t develop_account_name   = N(${ROOT_ACCOUNT}.dev);
    const static uint64_t ecosystem_account_name = N(${ROOT_ACCOUNT}.better);
+   const static uint64_t pow_pool_account_name  = N(${ROOT_ACCOUNT}.pow)
 
    const static uint64_t rank_all_account_name     = N(rank.all);
    const static uint64_t rank_new_account_name     = N(rank.new);
